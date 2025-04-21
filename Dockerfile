@@ -11,30 +11,14 @@ RUN npm install
 COPY angular-frontend /app/
 RUN npm run build --prod
 
-# Step 2: Build the Java backend using Maven
-FROM maven:3.8.6-openjdk-17 AS backend-build
-
-WORKDIR /app
-
-# Copy pom.xml and install dependencies
-COPY java-backend/pom.xml /app/
-RUN mvn dependency:resolve
-
-# Copy the entire backend source code and build it
-COPY java-backend /app/
-RUN mvn clean package -DskipTests
-
-# Step 3: Use a new image with Nginx to serve Angular and Java together
+# Step 2: Use Nginx to serve the Angular app
 FROM nginx:alpine
 
 # Copy the Angular build from the build stage into the Nginx server
 COPY --from=build /app/dist/angular-frontend /usr/share/nginx/html
 
-# Copy the Java backend JAR file from the build stage into the container
-COPY --from=backend-build /app/target/your-backend.jar /usr/share/java/your-backend.jar
+# Expose the frontend port
+EXPOSE 80
 
-# Expose ports
-EXPOSE 8081 80
-
-# Start the backend and frontend together
-CMD java -jar /usr/share/java/your-backend.jar & nginx -g 'daemon off;'
+# Start Nginx to serve the Angular app
+CMD ["nginx", "-g", "daemon off;"]
