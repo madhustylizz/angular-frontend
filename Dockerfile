@@ -1,25 +1,21 @@
-# Use official Node.js image
-FROM node:16-alpine
+# Use Node.js image to build the Angular app
+FROM node:16-alpine AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package.json /app/
-COPY package-lock.json /app/
+# Copy package files and install dependencies
+COPY package.json package-lock.json /app/
 RUN npm install
 
-# Copy the rest of the application
+# Copy the Angular project and build it
 COPY . /app/
-
-# Build the Angular app
 RUN npm run build --prod
 
-# Install an HTTP server to serve the built app
-RUN npm install -g http-server
+# Use Nginx to serve the built Angular app
+FROM nginx:alpine
 
-# Expose the port
+# Copy the Angular build from the build stage into the Nginx server
+COPY --from=build /app/dist/your-angular-app /usr/share/nginx/html
+
+# Expose port 80 for the frontend
 EXPOSE 80
-
-# Serve the app on port 80
-CMD ["http-server", "dist/your-angular-app", "-p", "80"]
