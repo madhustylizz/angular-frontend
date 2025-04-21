@@ -55,7 +55,7 @@ pipeline {
             steps {
                 script {
                     // Deploy the container (runs on port 8080)
-                    sh "docker run -d -p 8080:8080 ${REGISTRY}:${TAG}"
+                    sh "docker run -d -p 8082:8082 ${REGISTRY}:${TAG}"
                 }
             }
         }
