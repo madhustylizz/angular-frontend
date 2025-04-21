@@ -1,0 +1,32 @@
+<div id="userlogin">
+	<h2 class="text-primary my-2"><mark>User Login</mark></h2>
+
+	<div class="m-3 p-5 ">
+	  <div id="user">
+		<form [formGroup]="userForm">
+		  <div class="box-container">
+			<div class="user_icon">
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+				  <label for="exampleInputEmail1" style="color:white;">Email id</label>
+				  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+					formControlName="email">
+				  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+				</div>
+				<div class="form-group col-md-12">
+				  <label for="exampleInputPassword1" style="color:white;">Password</label>
+				  <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+				
+				</div>
+			  </div>
+		  <br>
+		  <button type="submit" class="btn btn-warning" (click)="onUserLogIn()">Login</button>
+		  <br>
+		<button type="submit" class="btn btn-success" (click)="onclk()">Create New Account</button>
+		</div>
+		</form>
+	  </div>
+	</div>
+  </div>
+  

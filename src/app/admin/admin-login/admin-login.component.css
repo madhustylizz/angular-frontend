@@ -1,0 +1,63 @@
+/* body{
+    background-image: url("https://i.ibb.co/rbSczV1/recipie2.jpg");
+    background-color: skyblue;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;	
+	font-family: Raleway, sans-serif;
+	
+	
+	
+}
+
+body {
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	
+}
+
+#container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background-image: linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0.1)),url(https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+    background-size: cover;
+    background-position: center;
+}
+.user_icon{
+    background-image: url('https://www.xeus.com/wp-content/uploads/2014/09/One_User_Orange.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+	display: flex;
+	margin: auto;
+    margin-top: -40px;
+    height: 70px;;
+    width:70px;
+}
+.screen {		
+		backdrop-filter: blur(16px) saturate(180%);
+		-webkit-backdrop-filter: blur(16px) saturate(180%);
+		background-color: rgba(17, 25, 40, 0.75);
+		border-radius: 12px;
+		display: flex;
+		justify-content: space-evenly;
+		flex-direction: row;
+		align-items: center;
+		border: 1px solid rgba(255, 255, 255, 0.125);
+		width: 30%;
+}
+.loginbtn{
+	width: 100px;
+	height:40px;
+	color:#000;
+	text-align: center;
+	border-radius: 2px solid rgb(48, 60, 226);
+	
+
+}

@@ -1,0 +1,70 @@
+<div id="userlogin">
+    <div class="text-center">
+        <h2 class="text-primary my-4"><mark>User Registration</mark></h2>
+    </div>
+    <div class="box-container">
+        <div class="user_icon">
+        </div>
+    <div class="m-4 p-4 form">
+        <form [formGroup]="userRegisterForm">
+            <div class="form-group col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" style="color:rgb(255, 255, 255);"> Name</label>
+                    <input type="fname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        formControlName="name" required>
+                </div>
+            </div>
+
+
+            <!-- <div class="form-group col-md-7">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" style="color:white;">Last Name</label>
+                    <input type="lname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  formControlName="email">
+                </div>
+            </div> -->
+
+            <div class="form-group col-md-12">
+                <label for="exampleInputEmail1" style="color:white;">Email id</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    formControlName="email" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" style="color:white;">Phone No</label>
+                    <input type="phone" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        formControlName="phone"required>
+                </div>
+            </div>
+
+            <!-- <div class="form-group col-md-7">
+                <div class="form-group">
+                    <label for="exampleInputEmail1" style="color:white;">Address</label>
+                    <input type="address" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  formControlName="name">
+                </div>
+            </div> -->
+
+            <div class="form-group col-md-12">
+                <label for="exampleInputPassword1" style="color:white;">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password" required>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="exampleInputPassword1" style="color:white;"> Confirm Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" formControlName="cpassword" required>
+            </div>
+
+            <button type="submit" class="btn btn-warning" (click)="onUserRegistrationSubmit()">Register</button>
+        </form>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+

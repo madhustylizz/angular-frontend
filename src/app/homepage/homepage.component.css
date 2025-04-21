@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(src\assets\images\madhu3.jpg);
+    background-size: cover;
+    background-position: center;
+    /* https://images.unsplash.com/photo-1507048331197-7d4ac70811cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80 */
+}
+
+.content {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.content h1 {
+    font-size: 70px;
+    margin-top: 80px;
+
+}
+
+.content p {
+    margin: 20px auto;
+    font-weight: 100;
+    line-height: 25px;
+    color: #fff;
+
+}
+
+.btn {
+    width: 200px;
+    padding: 15px;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 45px;
+    font-weight: bold;
+    border: 2px solid #009688;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    color: #fff;
+    border: none;
+    background: #009688;
+
+}
+
+
+.jumbotron {
+    background-color: rgba(204, 193, 42, 0.908);
+}
+
+#login {
+    text-align: center;
+    color: red;
+    text-decoration: solid;
+    padding-left: 0%;
+
+}
+
+#hey {
+    align-items: center;
+    color: red;
+    background-color: greenyellow;
+}
+
+#logo {
+
+    font-size: 45px;
+    font-weight: 400;
+    color: #fff;
+    font-family: 'Courier New', Courier, monospace;
+    width: 500px;
+    height: 60px;
+    background-color: rgb(40, 176, 58);
+}
+
+
+img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    opacity: 95%;
+}
+
+#toptext {
+    background-color: #32ad2c94;
+    color: rgb(240, 239, 232);
+
+}
+
+#toptext {
+    margin: 2px;
+
+}
+
+#toptext p {
+
+    font-size: 40px;
+
+}
+
+#login {
+    margin-left: 70%;
+
+}

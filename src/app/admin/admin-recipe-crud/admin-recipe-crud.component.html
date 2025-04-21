@@ -1,0 +1,175 @@
+<!-- <div class="container">
+    <div class="row">
+        <div *ngFor="let recipe of recipeList; let i = index" class="card" style="width: 18rem;margin-left: auto;
+        margin-right: auto; margin-bottom: 30px;">
+            <img class="card-img-top" src={{recipe.imgurl}} alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{recipe?.name}}</h5>
+                <p class="card-text">{{recipe?.cookingSteps}}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#id</th>
+                <th scope="col">imgurl</th>
+                <th scope="col">name</th>
+                <th scope="col">category</th>
+                <th scope="col">action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let recipe of recipeList; let i = index">
+                <th scope="row">{{recipe?.id}}</th>
+                <td>
+                    <img width="40" src={{recipe.imgurl}} alt="Card image cap">
+                </td>
+                <td>{{recipe?.name}}</td>
+                <td>@{{recipe?.category}}</td>
+                <td>
+                    <button class="btn btn-sm btn-warning" (click)="updateRecipeModal(recipe)" data-toggle="modal"
+                        data-target="#exampleModal" style="cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path
+                                d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                            <path fill-rule="evenodd"
+                                d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                        </svg>
+                    </button>&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-sm btn-danger" (click)="deleteByid(recipe)" style="cursor: pointer;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash" viewBox="0 0 16 16">
+                            <path
+                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                            <path fill-rule="evenodd"
+                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                        </svg>
+                    </button>&nbsp;&nbsp;&nbsp;
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--Add New Product -->
+    <button class="btn btn-sm btn-success" data-toggle="modal"
+    data-target="#addNewRecipeModal" style="cursor: pointer;">
+    Add new recipe</button>
+    <!-- <button class="btn btn-sm btn-primary" class="hello" (click)="goback()" 
+     style="cursor: pointer;">
+    Back</button> -->
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recipe Edit / Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editAdminFormGroup">
+                        <div class="form-group">
+                            <label for="id">Id</label>
+                            <input type="number" class="form-control" id="id" placeholder="1" formControlName="id" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Image url</label>
+                            <input type="text" class="form-control" id="imageUrl" formControlName="imgurl"
+                                placeholder="https://i.ibb.co/zXW6Xtb/butter-chicken.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Category</label>
+                            <input type="text" class="form-control" id="Category" placeholder="Category"
+                                formControlName="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Ingredents</label>
+                            <input type="text" class="form-control" id="Ingredents" placeholder="Ingredents"
+                                formControlName="ingrediants">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Cooking Steps</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                formControlName="cookingSteps"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="updateRecipe()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Add new product model -->
+   
+
+    <div class="modal fade" id="addNewRecipeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Recipe Add</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editAdminFormGroup">
+                        <!--<div class="form-group">
+                            <label for="id">Id</label>
+                            <input type="number" class="form-control" id="id" placeholder="1" formControlName="id" readonly>
+                        </div>-->
+                        
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Name</label>
+                            <input type="text" class="form-control" id="name" placeholder="name" formControlName="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Category</label>
+                            <input type="text" class="form-control" id="Category" placeholder="Category"
+                                formControlName="category">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Image url</label>
+                            <input type="text" class="form-control" id="imageUrl" formControlName="imgurl"
+                                placeholder="https://i.ibb.co/zXW6Xtb/butter-chicken.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Ingrediants</label>
+                            <input type="text" class="form-control" id="Ingredents" placeholder="Ingredents"
+                                formControlName="ingrediants">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">Cooking Steps</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                                formControlName="cookingSteps"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" (click)="addRecipe()">Save Recipe </button>
+                </div>
+            </div>
+        </div>
+    </div>

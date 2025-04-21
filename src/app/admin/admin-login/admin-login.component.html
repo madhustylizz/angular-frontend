@@ -1,0 +1,57 @@
+<!--html>
+
+<head>
+  <title>Admin login</title>
+</head>
+
+<body id="sect1">
+  <div class="container">
+    <div class="m-5 p-5 " style="height:580px;width:50%;margin-right: 30%;">
+
+
+      <form [formGroup]="adminFormGroup">
+        <h1 class="text-danger my-3">Admin Login</h1>
+        <div class="form-group">
+          <label for="username" style="color:white;">Username</label>
+          <input type="email" class="form-control" id="username" aria-describedby="username" formControlName="username">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group ">
+          <label for="password" style="color:white;">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password">
+        </div>
+        <br>
+        <button type="submit" (click)="onAdminLogin()" class="btn btn-success">Login</button>
+      </form>
+
+    </div>
+
+
+  </div>
+</body>
+
+</html !-->
+
+<div id="container">
+	<div class="screen">
+		<div class="screen__content">
+      <div class="user_icon">
+      </div>
+  <div class="m-4 p-4 form">
+      <form [formGroup]="adminFormGroup">
+          <div class="form-group col-md-12">
+            <div class="form-group">
+              <label for="username" style="color:white;">Username</label>
+              <input type="email" class="form-control" id="username" aria-describedby="username" formControlName="username">
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+                      <div class="form-group col-md-12">
+                        <label for="exampleInputPassword1" style="color:white;">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+                      </div>
+                      </div>
+                      <br>
+                      <button type="submit" class="btn btn-warning m-6 p-2"  (click)="onAdminLogin()">Login   </button>
+                      <!-- <button type="submit" (click)="onAdminLogin()" class="loginbtn">Login</button> -->
+
+
