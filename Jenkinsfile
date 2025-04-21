@@ -8,23 +8,29 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Backend and Frontend') {
+        stage('Checkout Repositories') {
             steps {
-                // Checkout both repositories
-                git url: 'https://github.com/madhustylizz/java-backend.git', branch: 'main'
+                // Checkout backend
+                dir('java-backend') {
+                    git url: 'https://github.com/madhustylizz/java-backend.git', branch: 'main'
+                }
+
+                // Checkout frontend
                 dir('angular-frontend') {
                     git url: 'https://github.com/madhustylizz/angular-frontend.git', branch: 'main'
                 }
             }
         }
 
-        stage('Build Backend and Angular App') {
+        stage('Build Projects') {
             steps {
                 script {
-                    // Build the backend with Maven
-                    sh 'mvn clean package -DskipTests'
+                    // Backend build
+                    dir('java-backend') {
+                        sh 'mvn clean package -DskipTests'
+                    }
 
-                    // Build the Angular app
+                    // Frontend build
                     dir('angular-frontend') {
                         sh 'npm install'
                         sh 'npm run build --prod'
@@ -36,7 +42,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build the Docker image combining both frontend and backend
                     sh "docker build -t ${REGISTRY}:${TAG} ."
                 }
             }
@@ -45,17 +50,15 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    // Push the Docker image to the registry
                     sh "docker push ${REGISTRY}:${TAG}"
                 }
             }
         }
 
-        stage('Deploy') {
+        stage('Deploy Container') {
             steps {
                 script {
-                    // Deploy the container (runs on port 8080)
-                    sh "docker run -d -p 8082:8082 ${REGISTRY}:${TAG}"
+                    sh "docker run -d -p 8081:8081 ${REGISTRY}:${TAG}"
                 }
             }
         }
