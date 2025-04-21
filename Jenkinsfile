@@ -2,27 +2,38 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = 'your-docker-repo/frontend-app'
-        IMAGE_NAME = 'frontend-app'
+        REGISTRY = 'your-docker-repo/full-stack-app'
+        IMAGE_NAME = 'full-stack-app'
         TAG = "${env.BUILD_ID}"
     }
 
     stages {
-        stage('Checkout Repositories') {
+        stage('Checkout Frontend') {
             steps {
-                // Checkout frontend repository
-                dir('angular-frontend') {
-                    git url: 'https://github.com/madhustylizz/angular-frontend.git', branch: 'main'
-                }
+                // Checkout the frontend repository
+                git url: 'https://github.com/madhustylizz/angular-frontend.git', branch: 'main'
             }
         }
 
-        stage('Build Frontend') {
+        stage('Checkout Backend') {
+            steps {
+                // Checkout the backend repository
+                git url: 'https://github.com/madhustylizz/java-backend.git', branch: 'main'
+            }
+        }
+
+        stage('Build Frontend and Backend') {
             steps {
                 script {
+                    // Build the Angular frontend
                     dir('angular-frontend') {
                         sh 'npm install'
                         sh 'npm run build --prod'
+                    }
+
+                    // Build the Java backend with Maven
+                    dir('java-backend') {
+                        sh 'mvn clean package -DskipTests'
                     }
                 }
             }
@@ -31,6 +42,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    // Build the Docker image
                     sh "docker build -t ${REGISTRY}:${TAG} ."
                 }
             }
@@ -39,6 +51,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
+                    // Push the Docker image to the registry
                     sh "docker push ${REGISTRY}:${TAG}"
                 }
             }
@@ -47,7 +60,8 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    sh "docker run -d -p 80:80 ${REGISTRY}:${TAG}"
+                    // Deploy the container (runs on ports 8082 and 80)
+                    sh "docker run -d -p 8082:8082 -p 80:80 ${REGISTRY}:${TAG}"
                 }
             }
         }
