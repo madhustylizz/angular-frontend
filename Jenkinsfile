@@ -2,35 +2,24 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = 'your-docker-repo/full-stack-app'
-        IMAGE_NAME = 'full-stack-app'
+        REGISTRY = 'your-docker-repo/frontend-app'
+        IMAGE_NAME = 'frontend-app'
         TAG = "${env.BUILD_ID}"
     }
 
     stages {
         stage('Checkout Repositories') {
             steps {
-                // Checkout backend
-                dir('java-backend') {
-                    git url: 'https://github.com/madhustylizz/java-backend.git', branch: 'main'
-                }
-
-                // Checkout frontend
+                // Checkout frontend repository
                 dir('angular-frontend') {
                     git url: 'https://github.com/madhustylizz/angular-frontend.git', branch: 'main'
                 }
             }
         }
 
-        stage('Build Projects') {
+        stage('Build Frontend') {
             steps {
                 script {
-                    // Backend build
-                    dir('java-backend') {
-                        sh 'mvn clean package -DskipTests'
-                    }
-
-                    // Frontend build
                     dir('angular-frontend') {
                         sh 'npm install'
                         sh 'npm run build --prod'
@@ -58,7 +47,7 @@ pipeline {
         stage('Deploy Container') {
             steps {
                 script {
-                    sh "docker run -d -p 8081:8081 ${REGISTRY}:${TAG}"
+                    sh "docker run -d -p 80:80 ${REGISTRY}:${TAG}"
                 }
             }
         }
