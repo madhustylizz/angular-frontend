@@ -3,7 +3,7 @@ FROM node:18-slim AS builder
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN ng build --configuration production
+RUN npx ng build --configuration production
 
 # Stage 2: Serve with Apache
 FROM httpd:alpine
