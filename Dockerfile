@@ -1,11 +1,10 @@
-# Dockerfile for Angular Frontend
-FROM node:18-alpine AS build
+# Stage 1: Build Angular App
+FROM node:18 AS builder
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run build
+RUN npm run build --prod --project=BookInventory
 
-FROM nginx:alpine
-COPY --from=build /app/dist/angular-frontend /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Stage 2: Serve with Apache
+FROM httpd:alpine
+COPY --from=builder /app/dist/BookInventory/ /usr/local/apache2/htdocs/
