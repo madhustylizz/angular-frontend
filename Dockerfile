@@ -4,7 +4,9 @@ WORKDIR /app
 
 # Copy only package files and install dependencies
 COPY package*.json ./
+RUN echo "Before npm install"
 RUN npm install
+RUN echo "After npm install"
 
 # Copy the rest of the application code
 COPY . .
@@ -13,7 +15,9 @@ COPY . .
 ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Build the Angular app
+RUN echo "Before build"
 RUN npm run build -- --configuration production
+RUN echo "After build"
 
 # Stage 2: Serve the app using http-server
 FROM node:18-slim
