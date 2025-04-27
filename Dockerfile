@@ -1,5 +1,5 @@
 # Stage 1: Build Angular App
-FROM node:16.20.2
+FROM node:16.20.2 AS builder
 WORKDIR /app
 
 # Copy only package files and install dependencies
@@ -10,9 +10,6 @@ RUN echo "After npm install"
 
 # Copy the rest of the application code
 COPY . .
-
-# Set environment for Angular build
-ENV NODE_OPTIONS=--openssl-legacy-provider
 
 # Build the Angular app
 RUN echo "Before build"
