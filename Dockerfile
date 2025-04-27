@@ -1,15 +1,32 @@
 # Stage 1: Build Angular App
 FROM node:18-slim AS builder
 WORKDIR /app
-COPY . .
-RUN npm install
-ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN npx ng build --configuration production
 
-# Stage 2: Serve with http-server
+# Copy only package files and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Set environment for Angular build
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# Build the Angular app
+RUN npm run build -- --configuration production
+
+# Stage 2: Serve the app using http-server
 FROM node:18-slim
-RUN npm install -g http-server
 WORKDIR /app
-COPY --from=builder /app/dist/BookInventory/ .
+
+# Install http-server globally
+RUN npm install -g http-server
+
+# Copy build output from the builder stage
+COPY --from=builder /app/dist/BookInventory /app
+
+# Expose the port
 EXPOSE 4200
-CMD [ "http-server", "-p", "4200" ]
+
+# Serve the app
+CMD ["http-server", ".", "-p", "4200", "-d", "false"]
