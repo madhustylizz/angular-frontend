@@ -12,7 +12,7 @@ export class AdminLoginService {
 
     }
 
-    ADMIN_LOGIN_URL = 'http://localhost:8080/api/Admin/login';
+    ADMIN_LOGIN_URL = 'http://localhost:8080/api/admin/login';
 
     // get all client details
     checkAdminLoginDetails(user: User): Observable<any> {
