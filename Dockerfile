@@ -1,5 +1,5 @@
 # Stage 1: Build Angular App
-FROM node:18-slim AS builder
+FROM node:16.20.2
 WORKDIR /app
 
 # Copy only package files and install dependencies
@@ -20,7 +20,7 @@ RUN npm run build -- --configuration production
 RUN echo "After build"
 
 # Stage 2: Serve the app using http-server
-FROM node:18-slim
+FROM node:16.20.2
 WORKDIR /app
 
 # Install http-server globally
